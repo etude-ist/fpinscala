@@ -42,6 +42,65 @@ object GettingStarted {
     msg.format(name, n, f(n))
   }
 
+
+  // Binary search as an example of monomorphic function
+  def monoBinarySearch(ds: Array[Double], key: Double): Int = {
+    @annotation.tailrec
+    def go(low: Int, mid: Int, high: Int): Int = {
+      if (low > high) -mid - 1
+      else {
+        val mid2 = (low + high) / 2
+        val d = ds(mid2)
+        if (d == key) mid2
+        else if (d > key) go(low, mid2, mid2-1)
+        else go(mid2 + 1, mid2, high)
+      }
+    }
+    go(0, 0, ds.length - 1)
+  }
+
+
+  // Binary search rewritten to serve as an example of polymorphic function
+  def polyBinarySearch[A](as: Array[A], key: A, gt: (A, A) => Boolean): Int = {
+    @annotation.tailrec
+    def go(low: Int, mid: Int, high: Int): Int = {
+      if (low > high) -mid - 1
+      else {
+        val mid2 = (low + high) / 2
+        val a = as(mid2)
+        val greater = gt(a, key)
+        if (!greater && !gt(key, a)) mid2
+        else if (greater) go(low, mid2, mid2-1)
+        else go(mid2 + 1, mid2, high)
+      }
+    }
+    go(0, 0, as.length - 1)
+  }
+
+  // EXERCISE 2: Implement isSorted, which checks whether an Array[A] is
+  // sorted according to a given comparison function
+  def isSorted[A](arr: Array[A], comp: (A,A) => Boolean): Boolean = {
+    @annotation.tailrec
+    def go(first: Int, next: Int, last: Int): Boolean = {
+      if (next > last) true
+      else {
+        val x = arr(first)
+        val y = arr(next)
+        if (comp(x, y)) {
+          go(next, next+1, last)
+        } else {
+          false
+        }
+      }
+    }
+    val n = arr.length - 1
+    if (n >= 2) {
+      go(0, 1, n)
+    } else {
+      true
+    }
+  }
+
   def main(args: Array[String]): Unit = {
     println(formatResult("absolute value", -42, abs))
     println(formatResult("factorial", 7, factorial))
