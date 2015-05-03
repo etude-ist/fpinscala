@@ -1,4 +1,12 @@
-object MyModule {
+object GettingStarted {
+
+  def abs(n: Int): Int = {
+    if (n < 0) {
+      -n 
+    } else {
+      n
+    }
+  }
 
   def factorial(n: Int): Int = {
 
@@ -12,7 +20,7 @@ object MyModule {
   }
 
 
-  // EXERCISE 1 (optional): Write a function to get the nth Fibonacci number. 
+  // EXERCISE 1: Write a function to get the nth Fibonacci number. 
   // The first two Fibonacci numbers are 0 and 1, and the next number is always 
   // the sum of the previous two. Your definition should use a local tail-recursive function.
   def fib(n: Int): Int = {
@@ -29,6 +37,15 @@ object MyModule {
 
   }
 
-  
+  def formatResult(name: String, n: Int, f: Int => Int) = {
+    val msg = "The %s of %d is %d."
+    msg.format(name, n, f(n))
+  }
+
+  def main(args: Array[String]): Unit = {
+    println(formatResult("absolute value", -42, abs))
+    println(formatResult("factorial", 7, factorial))
+    println(formatResult("fibonacci", 10, fib))
+  }
 
 }
