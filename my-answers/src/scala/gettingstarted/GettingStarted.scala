@@ -101,6 +101,14 @@ object GettingStarted {
     }
   }
 
+
+  // EXERCISE 3 (hard): Implement partial1 and write down a concrete usage of it.
+  def partial1[A,B,C](a: A, f: (A, B) => C): B => C = {
+    f(a, _:B)
+  }
+  // Usage:
+  // val add1 = partial1(1, (a: Int, b: Int) => a + b)
+
   def main(args: Array[String]): Unit = {
     println(formatResult("absolute value", -42, abs))
     println(formatResult("factorial", 7, factorial))
