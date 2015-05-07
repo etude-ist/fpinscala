@@ -109,6 +109,21 @@ object GettingStarted {
   // Usage:
   // val add1 = partial1(1, (a: Int, b: Int) => a + b)
 
+
+  // EXERCISE 4 (hard): Let's look at another example, currying, which converts
+  // a function of N arguments into a function of one argument that returns another
+  // function as its result.
+  def curry[A,B,C](f: (A, B) => C): A => (B => C) = {
+    (a: A) => ((b: B) => f(a, b))
+  }
+
+
+  // EXERCISE 5 (optional): Implement uncurry, which reverses the transformation of curry.
+  def uncurry[A,B,C](f: A => B => C): (A, B) => C = {
+    (a: A, b: B) => f(a)(b)
+  }
+
+
   def main(args: Array[String]): Unit = {
     println(formatResult("absolute value", -42, abs))
     println(formatResult("factorial", 7, factorial))
