@@ -67,4 +67,13 @@ object List {
     case Cons(_, xs) => Cons(elt, xs)
   }
 
+  // Exercise 6: Implement a function init, which returns a List
+  // consisting of all but the last element of a List.
+  // Example: List(1,2,3,4) => List(1,2,3)
+  def init[A](lst: List[A]): List[A] = lst match {
+    case Nil => sys.error("expected argument of type non-empty list")
+    case Cons(x, Nil) => Nil
+    case Cons(x, xs) => Cons(x, init(xs))
+  }
+
 }
