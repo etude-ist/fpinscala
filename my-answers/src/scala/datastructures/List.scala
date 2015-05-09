@@ -60,4 +60,11 @@ object List {
     case _ => lst
   }
 
+  // Exercise 5: Implement the function setHead for
+  // replacing the first element of a List with a different value.
+  def setHead[A](elt: A, lst: List[A]): List[A] = lst match {
+    case Nil => sys.error("expected argument of type non-empty list")
+    case Cons(_, xs) => Cons(elt, xs)
+  }
+
 }
