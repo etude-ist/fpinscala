@@ -53,4 +53,11 @@ object List {
     case (Cons(_, xs), _) => drop(n-1, xs)
   }
 
+  // Exercise 4: Implement dropWhile, which removes elements from the
+  // List prefix as long as they match a predicate.
+  def dropWhile[A](lst: List[A])(pred: A => Boolean): List[A] = lst match {
+    case Cons(x, xs) if pred(x) => dropWhile(xs)(pred)
+    case _ => lst
+  }
+
 }
