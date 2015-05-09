@@ -45,4 +45,12 @@ object List {
     case Cons(_, xs) => xs
   }
 
+  // Exercise 3: Generalize tail to the function drop, which removes the first
+  // n elements from a list.
+  def drop[A](n: Int, lst: List[A]): List[A] = (lst, n) match {
+    case (Nil, _) => Nil
+    case (_, 0) => lst
+    case (Cons(_, xs), _) => drop(n-1, xs)
+  }
+
 }
