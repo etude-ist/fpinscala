@@ -38,4 +38,11 @@ object List {
   // List(1,2,3,4,5) matches Cons(x, Cons(y, Cons(3, Cons(4, _)))) so the result
   // of the following match expression will be 3.
 
+  // Exercise 2: Implement the function tail for "removing" the first element
+  // of a List.
+  def tail[A](lst: List[A]): List[A] = lst match {
+    case Nil => sys.error("expected argument of type non-empty list")
+    case Cons(_, xs) => xs
+  }
+
 }
