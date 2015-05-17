@@ -76,4 +76,21 @@ object List {
     case Cons(x, xs) => Cons(x, init(xs))
   }
 
+  def foldRight[A,B](l: List[A], z: B)(f: (A, B) => B): B =
+    l match {
+      case Nil => z
+      case Cons(x, xs) => f(x, foldRight(xs, z)(f))
+    }
+
+  def sum2(l: List[Int]) =
+    foldRight(l, 0.0)(_ + _)
+
+  def product2(l: List[Double]) =
+    foldRight(l, 1.0)(_ * _)
+
+  // Exercise 7: Can product implemented using foldRight immediately
+  // halt the recursion and return 0.0 if it encounters a 0.0? Why or why not?
+  // Answer: No, because it must push frames onto the call stack as we go
+  // before it can begin collapsing it.
+
 }
