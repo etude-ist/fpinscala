@@ -93,4 +93,14 @@ object List {
   // Answer: No, because it must push frames onto the call stack as we go
   // before it can begin collapsing it.
 
+  // Exercise 8: See what happens when you pass Nil and Cons themselves to
+  // foldRight:
+  // scala> List.foldRight(List(1,2,3), Nil: List[Int])(Cons(_, _))
+  // res0: List[Int] = Cons(1,Cons(2,Cons(3,Nil)))
+
+  // Exercise 9: Compute the length of a list using foldRight
+  def length[A](l: List[A]): Int = {
+    foldRight(l, 0)((_, acc) => acc + 1)
+  }
+
 }
