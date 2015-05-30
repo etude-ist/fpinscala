@@ -116,4 +116,16 @@ object List {
     go(l, z)
   }
 
+  // Exercise 11: Write sum, product, and a function to compute the length of
+  // a list using foldLeft.
+  def sumFL(l: List[Int]) =
+    foldLeft(l, 0)(_ + _)
+
+  def productFL(l: List[Double]) =
+    foldLeft(l, 1.0)(_ * _)
+
+  def lengthFL[A](l: List[A]): Int = {
+    foldLeft(l, 0)((acc, _) => acc + 1)
+  }
+
 }
