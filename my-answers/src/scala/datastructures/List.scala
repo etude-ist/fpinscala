@@ -128,4 +128,15 @@ object List {
     foldLeft(l, 0)((acc, _) => acc + 1)
   }
 
+  // Exercise 12: Write a function that returns the reverse of a list (so given
+  // List(1,2,3) it returns List(3,2,1). See if you can write it using a fold.
+  def reverse[A](l: List[A]): List[A] = {
+    foldLeft(l, List[A]())((acc, h) => Cons(h, acc))
+  }
+
+  // Exercise 14: Implement append in terms of either foldLeft or foldRight.
+  def append[A](a1: List[A], a2: List[A]): List[A] = {
+    foldRight(a1, a2)(Cons(_, _))
+  }
+
 }
