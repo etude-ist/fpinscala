@@ -1,5 +1,3 @@
-package datastructures
-
 sealed trait List[+A]
 
 case object Nil extends List[Nothing]
@@ -101,6 +99,21 @@ object List {
   // Exercise 9: Compute the length of a list using foldRight
   def length[A](l: List[A]): Int = {
     foldRight(l, 0)((_, acc) => acc + 1)
+  }
+
+  // Exercise 10: foldRight is not tail-recursive and will StackOverflow
+  // for large lists. Convince yourself that this is the case, then write
+  // another general list-recursion function, foldLeft that is tail-recursive,
+  // using techniques discussed in the previous chapter.
+  def foldLeft[A,B](l: List[A], z: B)(f: (B, A) => B): B = {
+    @annotation.tailrec
+    def go(lst: List[A], acc: B): B = {
+      lst match {
+        case Nil => acc
+        case Cons(x, xs) => go(xs, f(acc, x))
+      }
+    }
+    go(l, z)
   }
 
 }
