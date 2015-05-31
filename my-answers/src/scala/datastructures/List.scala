@@ -139,4 +139,11 @@ object List {
     foldRight(a1, a2)(Cons(_, _))
   }
 
+  // Exercise 15: Write a function that concatenates a list of lists into a single list.
+  // Its runtime should be linear in the total length of all lists. Try to use
+  // functions we have already defined.
+  def concat[A](l: List[List[A]]): List[A] = {
+    foldRight(l, List[A]())((acc, h) => append(acc, h))
+  }
+
 }
