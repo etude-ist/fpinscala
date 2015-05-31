@@ -146,4 +146,10 @@ object List {
     foldRight(l, List[A]())((acc, h) => append(acc, h))
   }
 
+  // Exercise 16: Write a function that transforms a list of integers by adding 1
+  // to each element. (Reminder: this should be a pure function that returns a new List!)
+  def add1(l: List[Int]): List[Int] = {
+    foldRight(l, Nil: List[Int])((h, acc) => Cons(h+1, acc))
+  }
+
 }
