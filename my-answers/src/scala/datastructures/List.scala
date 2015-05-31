@@ -158,4 +158,10 @@ object List {
     foldRight(l, Nil: List[String])((h, acc) => Cons(h.toString, acc))
   }
 
+  // Exercise 18: Write a function map, that generalizes modifying each element
+  // in a list while maintaing the structure of the list.
+  def map[A,B](l: List[A])(f: A => B): List[B] = {
+    foldRight(l, Nil: List[B])((h, acc) => Cons(f(h), acc))
+  }
+
 }
