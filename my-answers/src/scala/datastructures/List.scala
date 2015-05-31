@@ -164,4 +164,17 @@ object List {
     foldRight(l, Nil: List[B])((h, acc) => Cons(f(h), acc))
   }
 
+  // Exercise 19: Write a function filter that removes elements from a list
+  // unless they satisfy a given predicate. Use it to remote all odd numbers from a
+  // List[Int].
+  def filter[A](l: List[A])(f: A => Boolean): List[A] = {
+    foldRight(l, Nil: List[A])((h, acc) => {
+      if (f(h)) {
+        Cons(h, acc)
+      } else {
+        acc
+      }
+    })
+  }
+
 }
