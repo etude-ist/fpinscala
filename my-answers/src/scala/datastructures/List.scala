@@ -152,4 +152,10 @@ object List {
     foldRight(l, Nil: List[Int])((h, acc) => Cons(h+1, acc))
   }
 
+  // Exercise 17: Write a function that turns each value in a List[Double]
+  // into a String
+  def strElts(l: List[Double]): List[String] = {
+    foldRight(l, Nil: List[String])((h, acc) => Cons(h.toString, acc))
+  }
+
 }
