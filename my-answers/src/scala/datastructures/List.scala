@@ -177,4 +177,47 @@ object List {
     })
   }
 
+  // Exercise 20: Write a function flatMap, that works like map except that
+  // the function given will return a list instead of a single result, and that list should be
+  // inserted into the final resulting list.
+  def flatMap[A,B](l: List[A])(f: A => List[B]): List[B] = {
+    concat(map(l)(f))
+  }
+
+  // Exercise 21: Can you use flatMap to implement filter?
+  // Yes, I can.
+  def filter2[A](l: List[A])(f: A => Boolean): List[A] = {
+    flatMap(l)(x => if (f(x)) List(x) else Nil)
+  }
+
+  // Exercise 22: Write a function that accepts two lists and constructs a new list
+  // by adding corresponding elements. For example, List(1,2,3) and List(4,5,6) becomes List(5,7,9)
+  def constructBy(lstA: List[Int], lstB: List[Int]): List[Int] = {
+    @annotation.tailrec
+    def go(pair: (List[Int], List[Int]), acc: List[Int]): List[Int] = {
+      pair match {
+        case (Nil, Nil) => acc
+        case (Nil, Cons(y, ys)) => go((Nil, ys), Cons(y, acc))
+        case (Cons(x, xs), Nil) => go((xs, Nil), Cons(x, acc))
+        case (Cons(x, xs), Cons(y, ys)) => go((xs, ys), Cons(x+y, acc))
+      }
+    }
+    reverse(go((lstA, lstB), Nil))
+  }
+
+  // Exercise 23: Generalize the function you just wrote so that it's not specific to
+  // integers or addition.
+  def generalConstructBy[A](lstA: List[A], lstB: List[A])(f: (A, A) => A): List[A] = {
+    @annotation.tailrec
+    def go(pair: (List[A], List[A]), acc: List[A]): List[A] = {
+      pair match {
+        case (Nil, Nil) => acc
+        case (Nil, Cons(y, ys)) => go((Nil, ys), Cons(y, acc))
+        case (Cons(x, xs), Nil) => go((xs, Nil), Cons(x, acc))
+        case (Cons(x, xs), Cons(y, ys)) => go((xs, ys), Cons(f(x,y), acc))
+      }
+    }
+    reverse(go((lstA, lstB), Nil))
+  }
+
 }
