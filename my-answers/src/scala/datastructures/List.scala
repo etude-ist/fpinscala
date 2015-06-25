@@ -220,4 +220,18 @@ object List {
     reverse(go((lstA, lstB), Nil))
   }
 
+  // Exercise 24: Implement hasSubsequence for checking whether a List contains another List as a subsequence
+  // Note: Finding a concise purly functional implementation that is also efficient is hard. We will return
+  // to an efficient implementation later.
+  def hasSubsequence[A](l: List[A], sub: List[A]): Boolean = {
+    def go(l: List[A], sub: List[A], status: Boolean): Boolean = {
+      (l, sub) match {
+        case (_, Nil) => true
+        case (Nil, Cons(y, ys)) => false
+        case (Cons(x, xs), Cons(y, ys)) => if (x == y) { go(xs, ys, true) } else if (x != y && status) { false } else { go(xs, sub, false) } 
+      }
+    }
+    go(l, sub, false)
+  }
+
 }
